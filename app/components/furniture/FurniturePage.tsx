@@ -27,6 +27,14 @@ interface FurniturePageProps {
 const FurniturePage = ({ products }: FurniturePageProps) => {
   const [loading, setLoading] = useState(false);
 
+  // Simulate a client-side loading state (e.g., for a button click)
+  const handleSimulateLoading = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Simulate a 2-second loading state
+  };
+
   // Enhanced Animations
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -200,6 +208,16 @@ const FurniturePage = ({ products }: FurniturePageProps) => {
                 </motion.div>
               </motion.div>
             )}
+
+            {/* Example: Simulate Loading on Button Click */}
+            <div className="mt-8 text-center">
+              <button
+                onClick={handleSimulateLoading}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
+              >
+                Simulate Loading
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
