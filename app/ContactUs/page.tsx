@@ -110,7 +110,7 @@ function OrderForm() {
 
   const handleCancelOrder = () => {
     if (!window.confirm("Cancel this order?")) return;
-    
+
     const cancellationMessage = `Order Cancellation:\nOrder ID: ${formData.orderId}\nProduct: ${formData.product}\nTotal: ${totalPrice} PKR`;
     window.open(
       `https://wa.me/03212558027?text=${encodeURIComponent(cancellationMessage)}`,
@@ -145,16 +145,16 @@ function OrderForm() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="container mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-center text-emerald-400 mb-8">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-center text-emerald-400 mb-6">
           Order Now <br /> All Over Pakistan
         </h1>
-        <div className="w-full md:w-1/2 mx-auto bg-gray-800 p-8 rounded-lg shadow-lg form-container">
-          <h2 className="text-2xl font-semibold text-emerald-400 mb-4">
+        <div className="w-full max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg form-container">
+          <h2 className="text-xl md:text-2xl font-semibold text-emerald-400 mb-4">
             Enter Your Details
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {[
               { label: "Full Name", name: "name" },
               { label: "Phone Number", name: "phone" },
@@ -164,7 +164,7 @@ function OrderForm() {
               { label: "Address Line 2 (Optional)", name: "addressl2" },
             ].map((field: { label: string; name: string }) => (
               <div key={field.name} className="form-field">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   {field.label}
                 </label>
                 <input
@@ -172,14 +172,14 @@ function OrderForm() {
                   name={field.name}
                   value={formData[field.name].toString()}
                   onChange={handleChange}
-                  className="w-full p-3 bg-gray-900 text-white border border-gray-700 rounded-md"
+                  className="w-full p-2 bg-gray-900 text-white border border-gray-700 rounded-md"
                   required={field.name !== "addressl2"}
                 />
               </div>
             ))}
 
             <div className="form-field">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-1">
                 Quantity
               </label>
               <input
@@ -187,12 +187,12 @@ function OrderForm() {
                 value={quantity}
                 onChange={handleQuantityChange}
                 min="1"
-                className="w-full p-3 bg-gray-900 text-white border border-gray-700 rounded-md"
+                className="w-full p-2 bg-gray-900 text-white border border-gray-700 rounded-md"
                 required
               />
             </div>
 
-            <div className="text-white text-lg form-field">
+            <div className="text-white text-sm md:text-base form-field">
               <p>📦 Product: {formData.product}</p>
               <p>💰 Price: {formData.price} PKR</p>
               <p>🚚 Delivery: {deliveryFee} PKR</p>
@@ -200,18 +200,18 @@ function OrderForm() {
               <p>🆔 Order ID: {formData.orderId}</p>
             </div>
 
-            <div className="flex items-center justify-between form-field">
+            <div className="flex flex-col md:flex-row gap-4 form-field">
               <button
                 type="button"
                 onClick={handleCancelOrder}
-                className="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-md transition-all"
+                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all flex-1"
               >
                 Cancel Order
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`bg-gradient-to-r from-emerald-400 to-indigo-500 text-white py-3 px-6 rounded-md transition-all ${
+                className={`bg-gradient-to-r from-emerald-400 to-indigo-500 text-white py-2 px-4 rounded-md transition-all flex-1 ${
                   isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:opacity-90"
                 }`}
               >
@@ -223,7 +223,7 @@ function OrderForm() {
           <div className="mt-6 text-center form-field">
             <button
               onClick={handleWhatsAppClick}
-              className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-md transition-all w-full"
+              className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition-all w-full"
             >
               <FaWhatsapp className="text-xl" />
               <span>Message on WhatsApp</span>
