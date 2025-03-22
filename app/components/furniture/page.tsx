@@ -103,7 +103,7 @@ const FurniturePage = ({ products }: FurniturePageProps) => {
               animate={{ y: 0, opacity: 1 }}
               className="text-5xl font-bold text-slate-800 mb-12 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
-              2024 Premium Collection
+              2026 Premium Collection
             </motion.h1>
 
             {products.length > 0 ? (
