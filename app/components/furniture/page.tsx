@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -19,32 +17,12 @@ const SEO_KEYWORDS = [
   "sustainable furniture Pakistan"
 ];
 
-const FurniturePage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+interface FurniturePageProps {
+  products: Product[];
+}
 
-  useEffect(() => {
-    async function getProducts() {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          "https://v2d5om50.api.sanity.io/v1/data/query/production?query=*[_type==\"chairs\" || _type==\"table\" || _type==\"outdoor\" || _type==\"sofa\" || _type==\"sets\"]{_id, name, description, price, \"imageUrl\": image.asset->url, \"slug\": slug.current}",
-          { cache: "no-store" }
-        );
-
-        if (!res.ok) throw new Error('Failed to fetch');
-        
-        const data = await res.json();
-        setProducts(data.result || []);
-      } catch (error) {
-        console.error("Fetch error:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    getProducts();
-  }, []);
+const FurniturePage = ({ products }: FurniturePageProps) => {
+  const [loading, setLoading] = useState(false);
 
   // Enhanced Animations
   const containerVariants = {
@@ -225,5 +203,29 @@ const FurniturePage = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  try {
+    const res = await fetch(
+      "https://v2d5om50.api.sanity.io/v1/data/query/production?query=*[_type==\"chairs\" || _type==\"table\" || _type==\"outdoor\" || _type==\"sofa\" || _type==\"sets\"]{_id, name, description, price, \"imageUrl\": image.asset->url, \"slug\": slug.current}"
+    );
+
+    if (!res.ok) throw new Error('Failed to fetch');
+
+    const data = await res.json();
+    return {
+      props: {
+        products: data.result || [],
+      },
+    };
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
+}
 
 export default FurniturePage;
