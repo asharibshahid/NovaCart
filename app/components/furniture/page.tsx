@@ -91,7 +91,7 @@ const FurniturePage = () => {
         <meta property="og:description" content="Explore our award-winning furniture range with exclusive designs and best price guarantee. Shop now for special discounts!" />
       </head>
 
-      <AnimatePresence mode="sync">
+      <AnimatePresence mode="popLayout">
         {loading ? (
           <motion.div
             key="loader"
